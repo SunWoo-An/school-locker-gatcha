@@ -1,2 +1,3 @@
-# school-locker-gatcha
-School's locker random assignment
+# School Locker Gatcha 
+학교 사물함 랜덤 배정 시스템
+KNU
