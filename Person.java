@@ -1,22 +1,14 @@
 
 public class Person {
 	
-	String name; // ÀÌ¸§
-	String SchoolNumber; // ÇĞ¹ø
-	String Number; // ÈŞ´ëÆù ¹øÈ£
-	String floor;  // 1Ãş 3Ãş B1Ãş 
-	String height; // »ó, Áß, ÇÏ ¿øÇÏ´Â »ç¹°ÇÔ
-	int num; // »ç¹°ÇÔ ¹øÈ£
-	
-	public Person(String name, String SchoolNumber, String Number, String floor, String height, int num) {
-		this.name = name;
-		this.SchoolNumber = SchoolNumber;
-		this.Number = Number;
-		this.floor = floor;
-		this.height = height;
-		this.num = num;
-	}
-	
+	String name; // ì´ë¦„
+	String SchoolNumber; // í•™ë²ˆ
+	String Number; // íœ´ëŒ€í° ë²ˆí˜¸
+	String floor;  // 1ì¸µ 3ì¸µ B1ì¸µ 
+	String height; // ìƒ, ì¤‘, í•˜ ì›í•˜ëŠ” ì‚¬ë¬¼í•¨
+	int num; // ì‹ ì²­í•œ ì‚¬ëŒì˜ ê³ ìœ  ë²ˆí˜¸ -> ì´ë¥¼ í†µí•´ ì¶”ì²¨
+
+	// ìƒì„±ì
 	public Person() {
 		this.name = "";
 		this.SchoolNumber = "";
@@ -26,4 +18,54 @@ public class Person {
 		this.num = 0;
 	}
 	
+	// Setter
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setSchoolNumber(String schoolNumber) {
+		SchoolNumber = schoolNumber;
+	}
+
+	public void setNumber(String number) {
+		Number = number;
+	}
+
+	public void setFloor(String floor) {
+		this.floor = floor;
+	}
+
+	public void setHeight(String height) {
+		this.height = height;
+	}
+
+	public void setNum(int num) {
+		this.num = num;
+	}
+
+	
+    // Getter
+	public String getName() {
+		return name;
+	}
+
+	public String getSchoolNumber() {
+		return SchoolNumber;
+	}
+
+	public String getNumber() {
+		return Number;
+	}
+
+	public String getFloor() {
+		return floor;
+	}
+
+	public String getHeight() {
+		return height;
+	}
+
+	public int getNum() {
+		return num;
+	}
 }
