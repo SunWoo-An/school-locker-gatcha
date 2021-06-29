@@ -23,23 +23,14 @@ import javax.swing.border.TitledBorder;
 
 public class MyGUI extends JFrame{
 	
-	// Excel 파일 열기
-	String path = MyGUI.class.getResource("").getPath();
-	File file = new File(path + "ExcelExFile.xlsx");
-	
-	// 데이터 관리하는 ArrayList
-	ArrayList<Person> list = new ArrayList<Person>();
-	ArrayList<Person> high = new ArrayList<Person>();
-	ArrayList<Person> middle = new ArrayList<Person>();
-	ArrayList<Person> low = new ArrayList<Person>();
-	
 	// GUI 구성요소
 	private JButton[] btn = new JButton[7];
 	private JLabel[] la = new JLabel[5];
 	private JPanel[] pa = new JPanel[3];
-	private JTextField[] tf = new JTextField[5];
+	private JTextField[] tf = new JTextField[2];
 	private JTextArea jt;
-	private int person_num = 0; // 사람들의 숫자
+	private int repo_num = 0; // 사물함 갯수
+	private int size = 0; // 세로줄 갯수
 	
 	// GUI 구성
 	public MyGUI() {
@@ -50,15 +41,16 @@ public class MyGUI extends JFrame{
 		Container c = getContentPane();
 		c.setLayout(new BorderLayout(2,2));
 		
-//		TitledBorder one = new TitledBorder(new LineBorder(Color.black),"사물함 정보 입력");
-//		one.setTitleColor(Color.BLACK);
-		
 		// 정보를 입력하는 란.
 		pa[0] = new JPanel();
-		pa[0].setLayout(new GridLayout(2,3));
-		JPanel[] information = new JPanel[3];
+		pa[0].setLayout(new GridLayout(4,1));
 		JButton submit = new JButton("submit");
-		
+		JButton random = new JButton("랜덤추첨");
+		random.setSize(100, 100);
+		submit.addActionListener(new MyActionListener());
+		random.addActionListener(new MyActionListener());
+
+		JPanel[] information = new JPanel[4];
 		String[] a = {"사물함 갯수", "1줄의 사물함 갯수 ( 세로 줄 )"};
 		for(int i = 0;i<a.length;i++) {
 			information[i] = new JPanel();
@@ -70,7 +62,10 @@ public class MyGUI extends JFrame{
 		information[2] = new JPanel();
 		information[2].add(submit);
 		
-		for(int i = 0;i<3;i++) {
+		information[3] = new JPanel();
+		information[3].add(random);
+		
+		for(int i = 0;i<4;i++) {
 			pa[0].add(information[i]);
 		}
 		c.add(pa[0],BorderLayout.WEST);
@@ -85,7 +80,7 @@ public class MyGUI extends JFrame{
 
 		// Button
 		JPanel[] layer = new JPanel[2];
-		String[] b = { "랜덤 추첨", "B1", "등록", "1F", "저장", "3F", "삭제"};
+		String[] b = {"B1", "등록", "1F", "저장", "3F", "삭제"};
 
 		// 패널 초기화
 		for (int i = 0; i < 2; i++) {
@@ -93,12 +88,9 @@ public class MyGUI extends JFrame{
 		}
 
 		// 버튼 초기화
-		for (int i = 0; i < 7; i++) {
+		for (int i = 0; i < b.length; i++) {
 			btn[i] = new JButton(b[i]);
 			btn[i].addActionListener(new MyActionListener());
-			if (i == 0) {
-				continue;
-			}
 			layer[i % 2].add(btn[i]); // 홀짝을 구분해서 String배열 b 를 복잡하게 안넣기 위함.
 		}
 		
@@ -107,6 +99,7 @@ public class MyGUI extends JFrame{
 		pa[2].add(layer[1]);
 		
 		c.add(pa[2],BorderLayout.SOUTH);
+		
 		setSize(1000,750);
 		setVisible(true);
 	}
@@ -122,9 +115,17 @@ public class MyGUI extends JFrame{
 		public void actionPerformed(ActionEvent e) {
 			
 			if(e.getActionCommand() == "랜덤 추첨") {
-				RandomGatcha lotto = new RandomGatcha(list,0);
-				lotto.randomgatcha();
+				//RandomGatcha lotto = new RandomGatcha(list,0);
+				//lotto.randomgatcha();
 			}
+			
+			else if(e.getActionCommand() == "submit") {
+				if(tf[0].getText() != null && tf[1].getText() != null) {
+					repo_num = Integer.parseInt(tf[0].getText());
+					size = Integer.parseInt(tf[1].getText());
+				}
+			}
+			
 			else if(e.getActionCommand() == "저장") {
 				JFileChooser fs = new JFileChooser(new File("c:\\"));
 				fs.setDialogTitle("Save a File");
@@ -144,6 +145,7 @@ public class MyGUI extends JFrame{
 					}
 				}
 			}
+			
 			else if(e.getActionCommand() == "B1") { 
 				JTable tb = null;
 				JScrollPane scroll = new JScrollPane();
@@ -152,6 +154,7 @@ public class MyGUI extends JFrame{
 				tb.add(scroll);
 				
 			}
+			
 			else if(e.getActionCommand() == "1F") {
 				JTable tb = null;
 				JScrollPane scroll = new JScrollPane();
@@ -160,6 +163,7 @@ public class MyGUI extends JFrame{
 				tb.add(scroll);
 				
 			}
+			
 			else if(e.getActionCommand() == "3F") {
 				JTable tb = null;
 				JScrollPane scroll = new JScrollPane();
@@ -168,12 +172,15 @@ public class MyGUI extends JFrame{
 				
 				
 			}
+			
 			else if(e.getActionCommand() == "등록") {
 				
 			}
+			
 			else if(e.getActionCommand() == "수정") {
 				
 			}
+			
 			else if(e.getActionCommand() == "삭제") {
 				
 			}
